@@ -1,5 +1,5 @@
 // Key controller 
-
+const url = window.location.href
 let keys = {}
 
 window.addEventListener("keydown", function(e) {
@@ -69,7 +69,7 @@ class Inventory {
       if (!item.id) return;
       const itemData = this.data.items[item.id];
       const itemDiv = document.createElement("div");
-      itemDiv.innerHTML = `<img src="${itemData.image}" /><span>${item.amount > 0 ? `x${item.amount}` : ""}</span>`;
+      itemDiv.innerHTML = `<img src="${url}${itemData.image}" /><span>${item.amount > 0 ? `x${item.amount}` : ""}</span>`;
       itemDiv.classList.add("item");
       slot.appendChild(itemDiv);
     }
@@ -329,7 +329,7 @@ class Commands {
             this.day.innerHTML = `Day ${arg}`;
           } else if (str == "car") {
             const car = document.createElement("video");
-            car.innerHTML = `<source src="/assets/misc/car.mp4" type="video/mp4" />`
+            car.innerHTML = `<source src="assets/misc/car.mp4" type="video/mp4" />`
             car.classList = "video";
             car.controls = false;
             car.onended = function(e) {
@@ -371,7 +371,7 @@ class Entities {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("/assets/menus/start.htm").then(res => res.text()).then(menu => {
+  fetch("assets/menus/start.htm").then(res => res.text()).then(menu => {
     const div = document.createElement("div");
     div.innerHTML = menu;
     div.id = "startMenu"
