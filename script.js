@@ -227,7 +227,7 @@ class Game {
       player.src = this.playerSprites[1];
       this.map.appendChild(player);
       this.track(player);
-      this.movement(player);
+      this.movement(player, p);
       resolve();
     });
   }
@@ -243,7 +243,8 @@ class Game {
     center();
   }
 
-  movement(player) {
+  movement(player, p) {
+    const speed = this.data.entities.player[p].speed;
     this.frame = this.playerSprites[1];
     function movement(x) {
       let direction;
@@ -259,9 +260,9 @@ class Game {
           x.frame = frame;
         }
         if (direction == "up" || direction == "down") {
-          player.style.top = `${parseInt(player.style.top) + (direction == "up" ? -1 : 1) * 5}px`;
+          player.style.top = `${parseInt(player.style.top) + (direction == "up" ? -1 : 1) * speed}px`;
         } else {
-          player.style.left = `${parseInt(player.style.left) + (direction == "left" ? -1 : 1) * 5}px`;
+          player.style.left = `${parseInt(player.style.left) + (direction == "left" ? -1 : 1) * speed}px`;
         }
       }
 
@@ -400,6 +401,7 @@ function rootPlayer(player) {
           const cmds = new Commands(game);
           const ents = new Entities(game.data, game);
           cmds.start();
+          audio("assets/audio/map/day.mp3", 25, true);
           res();
         });
       });
@@ -411,4 +413,11 @@ async function transition(from, run) {
   const fromDiv = document.getElementById(from);
   fromDiv.remove();
   run()
+}
+
+function audio(src, volume = 100, loop = false) {
+  const aud = new Audio(src);
+  aud.volume = volume / 100;
+  aud.loop = loop;
+  aud.play();
 }
