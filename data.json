@@ -118,11 +118,20 @@
   },
   "entities": {
     "player": {
-      "type": "player",
-      "image": "assets/entities/player/",
-      "speed": 5,
-      "size": 50,
-      "sounds": "assets/audio/player/"
+      "bnuy": {
+        "type": "player",
+        "image": "assets/entities/player/bnuy/",
+        "speed": 5,
+        "size": 50,
+        "sounds": "assets/audio/player/"
+      },
+      "car": {
+        "type": "player",
+        "image": "assets/entities/player/car/",
+        "speed": 10,
+        "size": 50,
+        "sounds": "assets/audio/player/"
+      }
     }
   }
 }

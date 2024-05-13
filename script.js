@@ -126,7 +126,8 @@ class Game {
     });
   }
 
-  async start(xx, yy, sxx, syy) {
+  async start(xx, yy, p, sxx, syy) {
+    document.getElementById("htmlIcon").href = `assets/misc/${p}/icon.png`
     new Promise(async resolve => {
       const x = xx;
       const y = (yy || xx);
@@ -200,7 +201,7 @@ class Game {
       }
       console.log(this.rawMap);
       // Player
-      const entity = this.data.entities.player;
+      const entity = this.data.entities.player[p];
       const player = document.createElement("img");
       player.classList.add("entity");
       player.classList.add("layers");
@@ -329,7 +330,7 @@ class Commands {
             this.day.innerHTML = `Day ${arg}`;
           } else if (str == "car") {
             const car = document.createElement("video");
-            car.innerHTML = `<source src="assets/misc/car.mp4" type="video/mp4" />`
+            car.innerHTML = `<source src="assets/misc/car/car.mp4" type="video/mp4" />`
             car.classList = "video";
             car.controls = false;
             car.onended = function(e) {
@@ -379,12 +380,23 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-function PLAY() {
+function rootPlay() {
   transition("startMenu", () => {
+    fetch("assets/menus/player.htm").then(res => res.text()).then(menu => {
+      const div = document.createElement("div");
+      div.innerHTML = menu;
+      div.id = "playerMenu"
+      document.body.appendChild(div);
+    });
+  });
+}
+
+function rootPlayer(player) {
+  transition("playerMenu", () => {
     new Promise(async res => {
       const gameInst = new Game()
       gameInst.then(async game => {
-        game.start(50, 50).then(() => {
+        game.start(50, 50, player).then(() => {
           const cmds = new Commands(game);
           const ents = new Entities(game.data, game);
           cmds.start();
@@ -397,20 +409,6 @@ function PLAY() {
 
 async function transition(from, run) {
   const fromDiv = document.getElementById(from);
-  const transitionDiv = document.createElement("div");
-  transitionDiv.id = "transition";
-  transitionDiv.classList = "transition";
-  transitionDiv.style.opacity = 0;
-  document.body.appendChild(transitionDiv);
-
-  await new Promise(resolve => setTimeout(resolve, 100));
-
-  transitionDiv.style.opacity = 1;
   fromDiv.remove();
-
   run()
-    transitionDiv.style.opacity = 0;
-    setTimeout(() => {
-      transitionDiv.remove();
-    }, 100);
 }
