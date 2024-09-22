@@ -1,24 +1,44 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta property="og:title" content="Barely Alive" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/misc/bnuy/bnuy.png" />
+    <meta
+      property="og:description"
+      content="Silly browser based survival game" />
+    <meta name="theme-color" content="#FFFFFF" />
+    <title>Barely Alive</title>
+    <link href="assets/misc/.../..." rel="icon" id="htmlIcon" />
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+  </head>
 
-<head>
-  <meta http-equiv='cache-control' content='no-cache'> 
-  <meta http-equiv='expires' content='0'> 
-  <meta http-equiv='pragma' content='no-cache'>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <meta property="og:title" content="Barely Alive" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/misc/bnuy/bnuy.png" />
-  <meta property="og:description" content="Silly browser based survival game" />
-  <meta name="theme-color" content="#FFFFFF">
-  <title>Barely Alive</title>
-  <link href="assets/misc/.../..." rel="icon" id="htmlIcon" />
-  <link href="style.css" rel="stylesheet" type="text/css" />
-</head>
-
-<body>
-  <script src="script.js"></script>
-</body>
-
+  <body>
+    <nav>
+      <div id="score">Score: 0</div>
+      <div class="health">
+        <div class="bar" id="health"></div>
+      </div>
+      <div id="day">Day 1</div>
+    </nav>
+    <div id="bottomNav" class="bottom-nav">
+      <div>Menu</div>
+      <div class="inventory" id="inv">
+        <div class="slot selected" id="slot-1"></div>
+        <div class="slot" id="slot-2"></div>
+        <div class="slot" id="slot-3"></div>
+        <div class="slot" id="slot-4"></div>
+        <div class="slot" id="slot-5"></div>
+        <div class="slot" id="slot-6"></div>
+        <div class="slot" id="slot-7"></div>
+        <div class="slot" id="slot-8"></div>
+        <div class="slot" id="slot-9"></div>
+      </div>
+      <div>Inventory</div>
+    </div>
+    <div id="map" class="map"></div>
+    <script src="/js/script.js"></script>
+  </body>
 </html>

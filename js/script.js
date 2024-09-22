@@ -1,13 +1,13 @@
-// Key controller 
-const url = window.location.href
-let keys = {}
+// Key controller
+const url = window.location.href;
+let keys = {};
 
-window.addEventListener("keydown", function(e) {
+window.addEventListener("keydown", function (e) {
   e.preventDefault();
   keys[e.key] = true;
 });
 
-window.addEventListener("keyup", function(e) {
+window.addEventListener("keyup", function (e) {
   delete keys[e.key];
 });
 
@@ -25,10 +25,10 @@ class Inventory {
       { id: null, amount: null },
       { id: null, amount: null },
       { id: null, amount: null },
-      { id: null, amount: null }
-    ]
+      { id: null, amount: null },
+    ];
     this.slots = document.querySelectorAll(".slot");
-    this.slots.forEach(slot => {
+    this.slots.forEach((slot) => {
       slot.addEventListener("click", () => {
         this.select(slot.id.split("-")[1]);
       });
@@ -40,9 +40,9 @@ class Inventory {
       }
     });
     return new Promise((resolve) => {
-      fetch("data.json")
-        .then(res => res.json())
-        .then(data => {
+      fetch("/js/data.json")
+        .then((res) => res.json())
+        .then((data) => {
           this.data = data;
           resolve(this);
         });
@@ -69,7 +69,9 @@ class Inventory {
       if (!item.id) return;
       const itemData = this.data.items[item.id];
       const itemDiv = document.createElement("div");
-      itemDiv.innerHTML = `<img src="${url}${itemData.image}" /><span>${item.amount > 0 ? `x${item.amount}` : ""}</span>`;
+      itemDiv.innerHTML = `<img src="${url}${itemData.image}" /><span>${
+        item.amount > 0 ? `x${item.amount}` : ""
+      }</span>`;
       itemDiv.classList.add("item");
       slot.appendChild(itemDiv);
     }
@@ -78,40 +80,6 @@ class Inventory {
 
 class Game {
   constructor() {
-    const gameDiv = document.createElement("div");
-    gameDiv.innerHTML = `<nav>
-      <div id="score">Score: 0</div>
-      <div class="health">
-        <div class="bar" id="health"></div>
-      </div>
-      <div id="day">Day 1</div>
-    </nav>
-    <div id="bottomNav" class="bottom-nav">
-      <div>Menu</div>
-      <div class="inventory" id="inv">
-        <div class="slot selected" id="slot-1">
-        </div>
-        <div class="slot" id="slot-2">
-        </div>
-        <div class="slot" id="slot-3">
-        </div>
-        <div class="slot" id="slot-4">
-        </div>
-        <div class="slot" id="slot-5">
-        </div>
-        <div class="slot" id="slot-6">
-        </div>
-        <div class="slot" id="slot-7">
-        </div>
-        <div class="slot" id="slot-8">
-        </div>
-        <div class="slot" id="slot-9">
-        </div>
-      </div>
-      <div>Inventory</div>
-    </div>
-    <div id="map" class="map"></div>`
-    document.body.appendChild(gameDiv);
     return new Promise((resolve) => {
       const inv = new Inventory();
       inv.then((invInst) => {
@@ -127,12 +95,12 @@ class Game {
   }
 
   async start(xx, yy, p, sxx, syy) {
-    document.getElementById("htmlIcon").href = `assets/misc/${p}/icon.png`
-    new Promise(async resolve => {
+    document.getElementById("htmlIcon").href = `/media/misc/${p}/icon.png`;
+    new Promise(async (resolve) => {
       const x = xx;
-      const y = (yy || xx);
-      const sx = (sxx || ((x * 50) / 2));
-      const sy = (syy || ((y * 50) / 2));
+      const y = yy || xx;
+      const sx = sxx || (x * 50) / 2;
+      const sy = syy || (y * 50) / 2;
       this.mx = x;
       this.my = y;
       this.inventory.update();
@@ -142,13 +110,16 @@ class Game {
       document.body.style.width = `${x * 50}px`;
       document.body.style.height = `${y * 50}px`;
       this.map.innerHTML = "";
-      this.rawMap = []
+      this.rawMap = [];
       this.layerHandler();
       for (let i = 0; i < y; i++) {
         for (let j = 0; j < x; j++) {
           // Grass
           const tile = document.createElement("img");
-          tile.src = this.data.tiles.grass.image[Math.floor(Math.random() * this.data.tiles.grass.image.length)]
+          tile.src =
+            this.data.tiles.grass.image[
+              Math.floor(Math.random() * this.data.tiles.grass.image.length)
+            ];
           tile.classList.add("tile");
           tile.style.left = `${i * 50}px`;
           tile.style.top = `${j * 50}px`;
@@ -168,31 +139,35 @@ class Game {
           if (tile <= 75 && tile > 50) {
             // Flowers
             const div = document.createElement("img");
-            div.src = this.data.tiles.flower.image[Math.floor(Math.random() * this.data.tiles.flower.image.length)]
+            div.src =
+              this.data.tiles.flower.image[
+                Math.floor(Math.random() * this.data.tiles.flower.image.length)
+              ];
             div.classList.add("tile");
             div.classList.add("breakable");
             div.classList.add("layers");
             const offsetX = this.vars(this.data.tiles.flower.offsetX) * 1;
             const offsetY = this.vars(this.data.tiles.flower.offsetY) * 1;
-            div.style.left = `${(i * 50) + offsetX}px`;
-            div.style.top = `${(j * 50) + offsetY}px`;
+            div.style.left = `${i * 50 + offsetX}px`;
+            div.style.top = `${j * 50 + offsetY}px`;
             div.style.width = `${this.vars(this.data.tiles.flower.size)}px`;
-            div.style.zIndex = 2;
             this.map.appendChild(div);
             layer += "flower/";
           } else if (tile <= 100 && tile > 75) {
             // Trees
             const div = document.createElement("img");
-            div.src = this.data.tiles.tree.image[Math.floor(Math.random() * this.data.tiles.tree.image.length)]
+            div.src =
+              this.data.tiles.tree.image[
+                Math.floor(Math.random() * this.data.tiles.tree.image.length)
+              ];
             div.classList.add("tile");
             div.classList.add("breakable");
             div.classList.add("layers");
             const offsetX = this.vars(this.data.tiles.tree.offsetX) * 1;
             const offsetY = this.vars(this.data.tiles.tree.offsetY) * 1;
-            div.style.left = `${(i * 50) + offsetX}px`;
-            div.style.top = `${(j * 50) + offsetY}px`;
+            div.style.left = `${i * 50 + offsetX}px`;
+            div.style.top = `${j * 50 + offsetY}px`;
             div.style.width = `${this.vars(this.data.tiles.tree.size)}px`;
-            div.style.zIndex = 4;
             this.map.appendChild(div);
             layer += "tree/";
           }
@@ -220,10 +195,18 @@ class Game {
           reader.readAsDataURL(blob);
         });
       }
-      await fetch(entity.image + "up.png").then(res => res.blob()).then(async blob => this.playerSprites.push(await uri(blob)));
-      await fetch(entity.image + "down.png").then(res => res.blob()).then(async blob => this.playerSprites.push(await uri(blob)));
-      await fetch(entity.image + "left.png").then(res => res.blob()).then(async blob => this.playerSprites.push(await uri(blob)));
-      await fetch(entity.image + "right.png").then(res => res.blob()).then(async blob => this.playerSprites.push(await uri(blob)));
+      await fetch(entity.image + "up.png")
+        .then((res) => res.blob())
+        .then(async (blob) => this.playerSprites.push(await uri(blob)));
+      await fetch(entity.image + "down.png")
+        .then((res) => res.blob())
+        .then(async (blob) => this.playerSprites.push(await uri(blob)));
+      await fetch(entity.image + "left.png")
+        .then((res) => res.blob())
+        .then(async (blob) => this.playerSprites.push(await uri(blob)));
+      await fetch(entity.image + "right.png")
+        .then((res) => res.blob())
+        .then(async (blob) => this.playerSprites.push(await uri(blob)));
       player.src = this.playerSprites[1];
       this.map.appendChild(player);
       this.track(player);
@@ -231,12 +214,13 @@ class Game {
       resolve();
     });
   }
+
   track(player) {
     function center() {
       player.scrollIntoView({
         block: "center",
         inline: "center",
-        behavior: "smooth"
+        behavior: "smooth",
       });
       requestAnimationFrame(center);
     }
@@ -260,29 +244,33 @@ class Game {
           x.frame = frame;
         }
         if (direction == "up" || direction == "down") {
-          player.style.top = `${parseInt(player.style.top) + (direction == "up" ? -1 : 1) * speed}px`;
+          player.style.top = `${
+            parseInt(player.style.top) + (direction == "up" ? -1 : 1) * speed
+          }px`;
         } else {
-          player.style.left = `${parseInt(player.style.left) + (direction == "left" ? -1 : 1) * speed}px`;
+          player.style.left = `${
+            parseInt(player.style.left) + (direction == "left" ? -1 : 1) * speed
+          }px`;
         }
+        player.setAttribute("relY", parseInt(player.style.top) / 50);
       }
 
       requestAnimationFrame(() => movement(x));
     }
 
-
     requestAnimationFrame(() => movement(this));
   }
 
   vars(str) {
-    let editedStr = str
-    const varRegex = /\{(.*?)\}/g
+    let editedStr = str;
+    const varRegex = /\{(.*?)\}/g;
     if (!varRegex.test(str)) return str;
     const matches = str.match(varRegex);
     if (!matches) return str;
     for (let i = 0; i < matches.length; i++) {
       const match = matches[i];
       const varName = match.replace(/[{}]/g, "");
-      let ret = ""
+      let ret = "";
       if (varName.startsWith("random(")) {
         const args = varName.replace("random(", "").replace(")", "").split(",");
         const min = parseInt(args[0].trim());
@@ -299,10 +287,11 @@ class Game {
     }
     return editedStr;
   }
+
   layerHandler(type = ".layers") {
-    document.querySelectorAll(type).forEach(elm => {
-      const zIndex = parseInt(elm.style.top.split("px")[0], 10);
-      elm.style.zIndex = zIndex;
+    document.querySelectorAll(type).forEach((elm) => {
+      const rect = elm.getBoundingClientRect();
+      elm.style.zIndex = Math.floor(rect.top + window.scrollY);
     });
   }
 }
@@ -329,18 +318,8 @@ class Commands {
           } else if (str.startsWith("day")) {
             const arg = str.replace("day", "").trim();
             this.day.innerHTML = `Day ${arg}`;
-          } else if (str == "car") {
-            const car = document.createElement("video");
-            car.innerHTML = `<source src="assets/misc/car/car.mp4" type="video/mp4" />`
-            car.classList = "video";
-            car.controls = false;
-            car.onended = function(e) {
-              car.remove();
-            }
-            document.body.appendChild(car);
-            car.play();
           } else {
-            alert("Invalid command " + str)
+            alert("Invalid command " + str);
           }
         }
       }
@@ -359,7 +338,8 @@ class Entities {
   spawn(e, x = 0, y = 0) {
     const entity = this.data.entities[e];
     if (!entity) throw new Error("Entity not found");
-    if (this.game.mx < x || this.game.my < y) throw new Error("Entity out of bounds");
+    if (this.game.mx < x || this.game.my < y)
+      throw new Error("Entity out of bounds");
     const div = document.createElement("img");
     div.src = `${entity.image}/down.png`;
     div.classList.add("entity");
@@ -371,38 +351,34 @@ class Entities {
   }
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
-  fetch("assets/menus/start.htm").then(res => res.text()).then(menu => {
-    const div = document.createElement("div");
-    div.innerHTML = menu;
-    div.id = "startMenu"
-    document.body.appendChild(div);
-  });
+  const menu = document.createElement("iframe");
+  menu.src = "/html/menus/start.html";
+  menu.id = "startMenu";
+  document.body.appendChild(menu);
 });
 
-function rootPlay() {
+function play() {
   transition("startMenu", () => {
-    fetch("assets/menus/player.htm").then(res => res.text()).then(menu => {
-      const div = document.createElement("div");
-      div.innerHTML = menu;
-      div.id = "playerMenu"
-      document.body.appendChild(div);
-    });
+    const menu = document.createElement("iframe");
+    menu.src = "/html/menus/player.html";
+    menu.id = "playerMenu";
+    document.body.appendChild(menu);
   });
 }
 
-function rootPlayer(player) {
+function selectPlayer(player) {
   transition("playerMenu", () => {
-    new Promise(async res => {
-      const gameInst = new Game()
-      gameInst.then(async game => {
+    new Promise(async (res) => {
+      const gameInst = new Game();
+      gameInst.then(async (game) => {
         game.start(50, 50, player).then(() => {
           const cmds = new Commands(game);
           const ents = new Entities(game.data, game);
           cmds.start();
-          audio("assets/audio/map/day.mp3", 25, true);
+          audio("/media/audio/map/day.mp3", 25, true);
           res();
+          game.layerHandler();
         });
       });
     });
@@ -412,7 +388,7 @@ function rootPlayer(player) {
 async function transition(from, run) {
   const fromDiv = document.getElementById(from);
   fromDiv.remove();
-  run()
+  run();
 }
 
 function audio(src, volume = 100, loop = false) {
@@ -421,3 +397,10 @@ function audio(src, volume = 100, loop = false) {
   aud.loop = loop;
   aud.play();
 }
+
+// IFrame --> Host
+window.addEventListener("message", function (e) {
+  const data = JSON.parse(e.data);
+  console.log(data);
+  if (data.type == "function") eval(data.message);
+});

@@ -1,20 +1,18 @@
 {
   "tiles": {
     "grass": {
-      "image": [
-        "assets/tiles/grass.png"
-      ],
+      "image": ["/media/tiles/grass.png"],
       "breakable": false,
       "solid": false,
       "size": 50
     },
     "flower": {
       "image": [
-        "assets/tiles/flowers/flower-0.png",
-        "assets/tiles/flowers/flower-1.png",
-        "assets/tiles/flowers/flower-2.png",
-        "assets/tiles/flowers/flower-3.png",
-        "assets/tiles/flowers/flower-4.png"
+        "/media/tiles/flowers/flower-0.png",
+        "/media/tiles/flowers/flower-1.png",
+        "/media/tiles/flowers/flower-2.png",
+        "/media/tiles/flowers/flower-3.png",
+        "/media/tiles/flowers/flower-4.png"
       ],
       "breakable": true,
       "solid": false,
@@ -32,10 +30,10 @@
     },
     "tree": {
       "image": [
-        "assets/tiles/trees/tree-0.png",
-        "assets/tiles/trees/tree-1.png",
-        "assets/tiles/trees/tree-2.png",
-        "assets/tiles/trees/tree-3.png"
+        "/media/tiles/trees/tree-0.png",
+        "/media/tiles/trees/tree-1.png",
+        "/media/tiles/trees/tree-2.png",
+        "/media/tiles/trees/tree-3.png"
       ],
       "breakable": true,
       "solid": true,
@@ -64,21 +62,21 @@
   },
   "items": {
     "flower": {
-      "image": "assets/tiles/flowers/flower-4.png",
+      "image": "/media/tiles/flowers/flower-4.png",
       "type": "tile",
       "tile": "F",
       "craftable": false,
       "stackable": true
     },
     "wood": {
-      "image": "assets/tiles/wood.png",
+      "image": "/media/tiles/wood.png",
       "type": "tile",
       "tile": "T",
       "craftable": false,
       "stackable": true
     },
     "planks": {
-      "image": "assets/tiles/planks.png",
+      "image": "/media/tiles/planks.png",
       "type": "tile",
       "tile": "P",
       "craftable": true,
@@ -86,14 +84,14 @@
       "stackable": true
     },
     "stick": {
-      "image": "assets/items/stick.png",
+      "image": "/media/items/stick.png",
       "type": "item",
       "craftable": true,
       "recipe": "stick",
       "stackable": true
     },
     "apple": {
-      "image": "assets/items/apple.png",
+      "image": "/media/items/apple.png",
       "type": "food",
       "restore": 10,
       "craftable": false,
@@ -120,17 +118,17 @@
     "player": {
       "bnuy": {
         "type": "player",
-        "image": "assets/entities/player/bnuy/",
+        "image": "/media/entities/player/bnuy/",
         "speed": 5,
         "size": 50,
-        "sounds": "assets/audio/player/"
+        "sounds": "/media/audio/player/"
       },
       "car": {
         "type": "player",
-        "image": "assets/entities/player/car/",
+        "image": "/media/entities/player/car/",
         "speed": 10,
         "size": 50,
-        "sounds": "assets/audio/player/"
+        "sounds": "/media/audio/player/"
       }
     }
   }
