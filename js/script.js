@@ -93,7 +93,9 @@ class Game {
   }
 
   async start(player, x, y = x, width = (x * 50) / 2, height = (y * 50) / 2) {
-    document.getElementById("htmlIcon").href = `/media/misc/${player}/icon.png`;
+    document.getElementById(
+      "htmlIcon"
+    ).href = `./media/misc/${player}/icon.png`;
     new Promise(async (resolve) => {
       this.mapx = x;
       this.mapy = y;
@@ -304,7 +306,7 @@ class Entities {
 
 document.addEventListener("DOMContentLoaded", () => {
   const menu = document.createElement("iframe");
-  menu.src = "/html/menus/start.html";
+  menu.src = "./html/menus/start.html";
   menu.id = "startMenu";
   document.body.appendChild(menu);
 });
@@ -312,7 +314,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function play() {
   transition("startMenu", () => {
     const menu = document.createElement("iframe");
-    menu.src = "/html/menus/player.html";
+    menu.src = "./html/menus/player.html";
     menu.id = "playerMenu";
     document.body.appendChild(menu);
   });
@@ -325,7 +327,7 @@ function selectPlayer(player) {
       gameInst.then(async (game) => {
         game.start(player, 50, 50).then(() => {
           const ents = new Entities(game.data, game);
-          audio("/media/audio/map/day.mp3", 25, true);
+          audio("./media/audio/map/day.mp3", 25, true);
           res();
           game.layerHandler();
         });
