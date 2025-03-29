@@ -38,7 +38,7 @@ class Inventory {
       }
     });
     return new Promise((resolve) => {
-      fetch("/js/data.json")
+      fetch("./js/data.json")
         .then((res) => res.json())
         .then((data) => {
           this.data = data;
