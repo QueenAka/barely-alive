@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../../css/menu.css" />
+  </head>
+  <body>
+    <img src="../../media/misc/background.png" class="background" />
+    <div class="startMenu">
+      <div class="content">
+        <div class="title">Character Select</div>
+        <div class="bnuy sel">
+          <h3>BNUY</h3>
+          <div>
+            <img src="../../media/misc/bnuy/bnuy.gif" class="gif" />
+            <p class="stats">
+              <span>Speed: 5</span>
+              <span>Health: 100</span>
+              <span>Strength: 5</span>
+              <span>Luck: 10</span>
+              <span>Stealth: 5</span>
+            </p>
+          </div>
+          <button onclick="select('bnuy')">Select</button>
+        </div>
+        <div class="car sel">
+          <h3>CAR</h3>
+          <div>
+            <img src="../../media/misc/car/car.gif" class="gif" />
+            <p class="stats">
+              <span>Speed: 10</span>
+              <span>Health: 50</span>
+              <span>Strength: 10</span>
+              <span>Luck: 5</span>
+              <span>Stealth: 10</span>
+            </p>
+          </div>
+          <button onclick="select('car')">Select</button>
+        </div>
+      </div>
+    </div>
+    <script src="../../js/menus.js"></script>
+    <script>
+      function select(player) {
+        messageHost({
+          type: "function",
+          message: `selectPlayer("${player}")`,
+        });
+      }
+    </script>
+  </body>
+</html>

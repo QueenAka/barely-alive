@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="../../css/menu.css" />
+  </head>
+  <body>
+    <img src="../../media/misc/background.png" class="background" />
+    <div class="startMenu">
+      <div class="content">
+        <div class="title">Barely Alive</div>
+        <button onclick="play()">PLAY</button>
+        <button onclick="settings()">SETTINGS</button>
+      </div>
+    </div>
+    <script src="../../js/menus.js"></script>
+    <script>
+      function play() {
+        messageHost({
+          type: "function",
+          message: "play()",
+        });
+      }
+    </script>
+  </body>
+</html>

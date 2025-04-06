@@ -1,0 +1,135 @@
+{
+  "tiles": {
+    "grass": {
+      "image": ["./media/tiles/grass.png"],
+      "breakable": false,
+      "solid": false,
+      "size": 50
+    },
+    "flower": {
+      "image": [
+        "./media/tiles/flowers/flower-0.png",
+        "./media/tiles/flowers/flower-1.png",
+        "./media/tiles/flowers/flower-2.png",
+        "./media/tiles/flowers/flower-3.png",
+        "./media/tiles/flowers/flower-4.png"
+      ],
+      "breakable": true,
+      "solid": false,
+      "breakTime": 0.1,
+      "drops": [
+        {
+          "item": "flower",
+          "amount": 1,
+          "chance": 100
+        }
+      ],
+      "offsetX": "{random(-5, 5)}",
+      "offsetY": "{random(-5, 5)}",
+      "size": "{random(20, 22)}"
+    },
+    "tree": {
+      "image": [
+        "./media/tiles/trees/tree-0.png",
+        "./media/tiles/trees/tree-1.png",
+        "./media/tiles/trees/tree-2.png",
+        "./media/tiles/trees/tree-3.png"
+      ],
+      "breakable": true,
+      "solid": true,
+      "breakTime": 1,
+      "drops": [
+        {
+          "item": "wood",
+          "amount": "{random(1, 3)}",
+          "chance": 100
+        },
+        {
+          "item": "stick",
+          "amount": "{random(1, 5)}",
+          "chance": 50
+        },
+        {
+          "item": "apple",
+          "amount": "1",
+          "chance": 5
+        }
+      ],
+      "offsetX": "{random(-5, 5)}",
+      "offsetY": "{random(-5, 5)}",
+      "size": "{random(50, 70)}"
+    }
+  },
+  "items": {
+    "flower": {
+      "image": "./media/tiles/flowers/flower-4.png",
+      "type": "tile",
+      "tile": "F",
+      "craftable": false,
+      "stackable": true
+    },
+    "wood": {
+      "image": "./media/tiles/wood.png",
+      "type": "tile",
+      "tile": "T",
+      "craftable": false,
+      "stackable": true
+    },
+    "planks": {
+      "image": "./media/tiles/planks.png",
+      "type": "tile",
+      "tile": "P",
+      "craftable": true,
+      "recipe": "planks",
+      "stackable": true
+    },
+    "stick": {
+      "image": "./media/items/stick.png",
+      "type": "item",
+      "craftable": true,
+      "recipe": "stick",
+      "stackable": true
+    },
+    "apple": {
+      "image": "./media/items/apple.png",
+      "type": "food",
+      "restore": 10,
+      "craftable": false,
+      "stackable": true
+    }
+  },
+  "recipes": {
+    "planks": {
+      "recipe": [null, null, null, null, "wood", null, null, null, null],
+      "return": {
+        "item": "planks",
+        "amount": 4
+      }
+    },
+    "stick": {
+      "recipe": [null, null, null, null, "planks", null, null, null, null],
+      "return": {
+        "item": "stick",
+        "amount": 4
+      }
+    }
+  },
+  "entities": {
+    "player": {
+      "bnuy": {
+        "type": "player",
+        "image": "./media/entities/player/bnuy/",
+        "speed": 5,
+        "size": 50,
+        "sounds": "./media/audio/player/"
+      },
+      "car": {
+        "type": "player",
+        "image": "./media/entities/player/car/",
+        "speed": 10,
+        "size": 50,
+        "sounds": "./media/audio/player/"
+      }
+    }
+  }
+}
